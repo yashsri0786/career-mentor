@@ -20,14 +20,39 @@ export default function Home() {
   const handleResumeUpload = (resumeText: string) => {
     setUploadedResume(resumeText);
     
-    // Simple name extraction: look for common patterns
+    // Improved name extraction: look for common patterns
     const lines = resumeText.split('\n').filter(line => line.trim());
-    if (lines.length > 0) {
-      // First non-empty line is usually the name
-      const firstLine = lines[0].trim();
-      // Check if it looks like a name (2-4 words, no special chars)
-      if (/^[A-Za-z\s]{2,50}$/.test(firstLine) && firstLine.split(' ').length <= 4) {
-        setCandidateName(firstLine);
+    
+    for (let i = 0; i < Math.min(10, lines.length); i++) {
+      const line = lines[i].trim();
+      
+      // Skip empty lines, common headers, and lines with special characters
+      if (!line || line.length < 2) continue;
+      
+      // Skip common CV headers
+      const lowercaseLine = line.toLowerCase();
+      if (lowercaseLine.includes('curriculum') || 
+          lowercaseLine.includes('resume') || 
+          lowercaseLine.includes('cv') ||
+          lowercaseLine.includes('vitae') ||
+          lowercaseLine.includes('contact') ||
+          lowercaseLine.includes('email') ||
+          lowercaseLine.includes('phone')) {
+        continue;
+      }
+      
+      // Look for a name pattern: 2-5 words, mostly letters, allows dots and hyphens
+      const namePattern = /^[A-Za-z][A-Za-z.\s-]{1,48}[A-Za-z]$/;
+      const words = line.split(/\s+/);
+      
+      if (namePattern.test(line) && words.length >= 2 && words.length <= 5) {
+        // Additional check: ensure it's not all caps (likely a header)
+        const capsWords = words.filter(w => w === w.toUpperCase() && w.length > 1);
+        if (capsWords.length < words.length) {
+          setCandidateName(line);
+          console.log('Extracted name:', line);
+          break;
+        }
       }
     }
   };
