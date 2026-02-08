@@ -31,12 +31,23 @@ export async function POST(request: NextRequest) {
     const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
 
     if (action === "init") {
-      const prompt = `${systemPrompt}\n\nThe user has uploaded their resume. Greet them warmly, acknowledge their background based on the resume (if provided), and offer your expertise to help them with their career in your industry.
+      const prompt = `${systemPrompt}
+
+IMPORTANT INSTRUCTIONS FOR THIS CONVERSATION:
+- Be conversational, warm, and human-like
+- Keep responses concise (2-3 sentences max initially)
+- Let the conversation flow naturally - don't overwhelm with information
+- Gradually reveal insights about their profile as they engage
+- Ask follow-up questions to understand their goals better
+
+The user has uploaded their resume. Extract their name from the resume below.
+
+Greet them briefly and warmly by their first name. Keep it SHORT - just say hello, mention you've reviewed their profile, and ask what brings them here today or how you can help.
+
+DO NOT discuss their background details in the first message. Save that for when they respond.
 
 Here's their resume:
-${resumeData || "Not provided yet"}
-
-They'd like to talk about career opportunities in ${industry}.`;
+${resumeData || "Not provided yet"}`;
 
       const result = await model.generateContent(prompt);
       const response = await result.response;
@@ -49,7 +60,23 @@ They'd like to talk about career opportunities in ${industry}.`;
         `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.content}`
       ).join('\n');
 
-      const prompt = `${systemPrompt}\n\nYou have access to the user's resume:\n${resumeData || "Not provided"}\n\nConversation so far:\n${conversationHistory}\n\nProvide your response:`;
+      const prompt = `${systemPrompt}
+
+CONVERSATION STYLE:
+- Be conversational and natural
+- Keep responses concise and focused (3-5 sentences typically)
+- Gradually reveal insights about their profile based on the conversation flow
+- Ask thoughtful follow-up questions
+- Don't dump all information at once - let it be a dialogue
+- Reference specific details from their resume when relevant to the discussion
+
+Resume for context:
+${resumeData || "Not provided"}
+
+Conversation so far:
+${conversationHistory}
+
+Provide your response:`;
 
       const result = await model.generateContent(prompt);
       const response = await result.response;
