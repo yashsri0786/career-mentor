@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GENERATIVE_AI_API_KEY || "");
 
 export async function POST(request: NextRequest) {
   try {
@@ -22,7 +22,7 @@ Provide thoughtful, actionable advice tailored to each person's situation. Ask c
       `${msg.role === 'user' ? 'User' : 'Advisor'}: ${msg.content}`
     ).join('\n');
 
-    const model = genAI.getGenerativeModel({ model: "gemini-3-pro-preview" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const prompt = `${systemPrompt}\n\nConversation so far:\n${conversationHistory}\n\nProvide your response:`;
 

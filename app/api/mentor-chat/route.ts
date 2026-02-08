@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GENERATIVE_AI_API_KEY || "");
 
 const industryProfiles: Record<string, string> = {
   finance: "You are a Fortune 50 Finance Executive with 30+ years of experience in Investment Banking, Asset Management, and Corporate Finance. You've worked at top firms like Goldman Sachs, JP Morgan, and Morgan Stanley. You provide wisdom on financial careers, navigating corporate structures, and building a career in finance.",
@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
     }
 
     const systemPrompt = industryProfiles[industry];
-    const model = genAI.getGenerativeModel({ model: "gemini-3-pro-preview" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     if (action === "init") {
       const prompt = `${systemPrompt}\n\nThe user has uploaded their resume. Greet them warmly, acknowledge their background based on the resume (if provided), and offer your expertise to help them with their career in your industry.

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GENERATIVE_AI_API_KEY || "");
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const model = genAI.getGenerativeModel({ model: "gemini-3-pro-preview" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const prompt = `You are an ATS (Applicant Tracking System) expert and career advisor. Analyze the resume against the job description and provide:
 1. An overall match score (0-100)
