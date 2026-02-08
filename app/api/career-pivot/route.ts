@@ -22,7 +22,7 @@ Provide thoughtful, actionable advice tailored to each person's situation. Ask c
       `${msg.role === 'user' ? 'User' : 'Advisor'}: ${msg.content}`
     ).join('\n');
 
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
 
     const prompt = `${systemPrompt}\n\nConversation so far:\n${conversationHistory}\n\nProvide your response:`;
 
