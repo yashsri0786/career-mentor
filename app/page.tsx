@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import AnalyzeCV from "@/components/features/AnalyzeCV";
 import ATSMatching from "@/components/features/ATSMatching";
 import TalkToMentors from "@/components/features/TalkToMentors";
@@ -130,6 +131,8 @@ export default function Home() {
           <CareerPivot />
         </div>
       </div>
+      
+      <Footer />
     </main>
   );
 }
