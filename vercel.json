@@ -1,0 +1,8 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "env": {
+    "GOOGLE_GENERATIVE_AI_API_KEY": "@google_generative_ai_api_key"
+  }
+}
