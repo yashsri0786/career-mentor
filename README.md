@@ -217,4 +217,6 @@ For support or questions, please refer to the documentation or contact the devel
 
 ---
 
+**Designed as part of BMA5434 Design Thinking and Business Innovations (Prof Emily) | Team 3**
+
 Built with ❤️ for career success
