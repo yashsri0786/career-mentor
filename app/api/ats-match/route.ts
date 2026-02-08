@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
     const prompt = `You are an ATS (Applicant Tracking System) expert and career advisor. Analyze the resume against the job description and provide:
 1. An overall match score (0-100)

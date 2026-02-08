@@ -30,7 +30,7 @@ Conduct a professional, realistic interview:
 - Focus on technical/role-specific questions for Managerial Round  
 - Focus on culture fit and background for HR Round`;
 
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
     if (action === "start") {
       const prompt = `${systemPrompt}\n\nStart the ${interviewType} interview for ${name} applying for ${role}.`;

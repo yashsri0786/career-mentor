@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
     }
 
     const systemPrompt = industryProfiles[industry];
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
     if (action === "init") {
       const prompt = `${systemPrompt}\n\nThe user has uploaded their resume. Greet them warmly, acknowledge their background based on the resume (if provided), and offer your expertise to help them with their career in your industry.
