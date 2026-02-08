@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
 
     const prompt = `You are an expert career advisor and resume reviewer. Analyze the provided resume and provide a comprehensive analysis covering:
 1. Overall Structure & Formatting
